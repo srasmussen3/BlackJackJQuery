@@ -116,6 +116,7 @@
 		  } else {
 		    shufflePoint = Math.round(numOfCards * .8);
 		  }
+			numDecks = parseInt(deckCount);
 		  return numOfCards;
 		}
 
@@ -562,8 +563,6 @@
 		    updateDealerScore("dealer", DealerScore);
 		    setTimeout(playDealerHandInit, dealRoundDelay);
 		  } else {
-		    console.log(ActiveSplit);
-		    console.log(ActiveHands);
 		    if (!ActiveSplit) {
 		      evaluateGame();
 
@@ -651,8 +650,12 @@
 
 		function card_suit(val) {
 		  Suit = "";
-		  valx = val / 13 + "";
+			console.log(val);
+
+		  valx = (val/numDecks) / 13 + "";
+			console.log(valx);
 		  valx = valx.substring(0, 1);
+			console.log(valx);
 		  if (valx == 0) Suit = "S";
 		  if (valx == 1) Suit = "C";
 		  if (valx == 2) Suit = "H";
