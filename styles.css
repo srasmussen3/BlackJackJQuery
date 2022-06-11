@@ -1,0 +1,136 @@
+html {
+  background: url(Images/BlackjackTable.JPG) no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+body {
+  /* background-color: #109e3d; */
+  color: yellow;
+}
+
+h1 {
+  text-align: center;
+}
+
+div {
+  text-align: center;
+}
+.activeHand {
+  /* background-color: #66de8a; */
+  background-color: #32a852;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cardarea {
+  height: 145px;
+  /* border-top: 1px solid black;
+  border-bottom: 1px solid black; */
+  /* border: 1px solid black; */
+  margin-bottom: 1px;
+  align-items: center;
+}
+
+.inline-half {
+  width: 49%;
+}
+.inline-third {
+  width: 33%;
+}
+
+.block {
+  width: 100%;
+}
+
+.control {
+  padding: 5px;
+  border: 1px solid black;
+  margin-bottom: 1px;
+}
+
+.readout {
+  height: 80px;
+  border: 1px solid black;
+  margin-bottom: 1px;
+}
+
+.hidden {
+  /* visibility: hidden; */
+  display: none;
+}
+
+img {
+  /* display: inline; */
+  max-width: 20%;
+  /* max-height: 100%; */
+  /* width: 71px; */
+  height: auto;
+
+}
+
+/* input {
+  background-color: #dde0da;
+} */
+
+input[type="text"] {
+  background-color: #dde0da;
+  width: 50px;
+}
+input[type="button"] {
+  background-color: #dde0da;
+  width: 95px;
+}
+
+.control {
+  width: 50%;
+  margin: auto;
+}
+.rows {
+  width: 100%;
+  display: block;
+}
+
+.column {
+  width: 100%;
+  display: inline-block;
+}
+.column-inline {
+  width: 100%;
+  display: inline;
+}
+.player-controls {
+  margin: 0, 10, 0, 10;
+}
+
+.label {
+  width: 15%;
+  float: left;
+  margin-left: 5px;
+}
+
+.output {
+  width: 60%;
+  float: left;
+  text-align: right;
+}
+
+.float-left {
+  float: left;
+  margin-left: 5px;
+}
+
+footer {
+  text-align: center;
+  height: .7 rem;
+}
+
+.hidden-text{
+  color: #dde0da;
+}

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Blackjack</title>
+
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+  <h1>BlackJack</h1>
+
+  <div class="container">
+    <div class="comp_player1 cardarea block" name="compplayer1">
+      <p>Computer Player</p>
+
+    </div>
+    <div class="comp_player2 cardarea block" name="compplayer2">
+      <p>Computer Player</p>
+
+    </div>
+    <div class="player cardarea block" name="player1">
+      <p>Player</p>
+
+    </div>
+    <div class="player2 cardarea block hidden" name="player2">
+      <p>Player Split</p>
+
+    </div>
+    <div class="player3 cardarea block hidden" name="player3">
+      <p>Player Split</p>
+
+    </div>
+    <div class="dealer cardarea block" name="dealer">
+      <p>Dealer</p>
+
+    </div>
+
+    <div class="control block">
+      <form class="form-class">
+        <div class="row">
+          <input type="button" name="Deal" value="Deal" onClick="deal()">
+          <span class="player-controls">
+            &nbsp; &nbsp;<input type="button" name="Hit" value="Hit" onClick="playerHit()">
+            <input type="button" name="Stand" value="Stand" onClick="playerStand()">
+            <input type="button" name="DoubleDown" value="Double Down" onClick="playerDoubleDown()">
+            <input type="button" name="Split" value="Split" onClick="playerSplit()">
+          </span>
+          &nbsp; &nbsp;<input type="button" name="NewGame" value="New Game" onClick="newGame()">
+        </div>
+        <div class="row">
+          <div class="column-inline">
+            <lable class="label">Player score: </lable>
+            <input type="text" name="playerscore" class="output hidden-text">
+          </div>
+          <div class="column-inline">
+            <lable class="label">Dealer score: </lable>
+            <input type="text" name="dealerscore" class="output hidden-text">
+          </div>
+          <div class="column-inline">
+            <input type="checkbox" name="showPS" onClick="showPlayerScore()">
+            <lable>Show Player Score</lable>
+          </div>
+          <div class="column-inline">
+            <input type="checkbox" name="showDS" onClick="showDealerScore()">
+            <lable>Show Dealer Score</lable>
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <lable class="label">Bank: </lable>
+            <input type="text" name="Bank" value="200" class="output">
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <lable class="label">Bet: </lable>
+            <input type="text" name="Bet" value="5" class="output">
+          </div>
+        </div>
+        <div class="row float-left">
+            <input type="button" name="ChangeBet" value="Change Bet" onClick="changeBetValue()">
+        </div>
+
+      </form>
+
+    </div>
+
+    <div class="readout block">
+      <h1>Go Mets Bitches!</h1>
+
+    </div>
+  </div>
+  <footer>
+      <p>Copyright © 2022 SGR3</p>
+  </footer>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="bj_control.js" charset="utf-8"></script>
+
+</body>
+
+</html>
