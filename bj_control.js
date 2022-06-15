@@ -60,6 +60,10 @@
 		  console.log("newGame");
 		  enableDisableControlButtons("newGame");
 		  numCards = getNumDecks();
+			if (numCards === 0) {
+				enableDisableControlButtons("load");
+				return;
+			}
 		  startShuffleProcess();
 		  GameOver = false;
 		  StartGame = true;
@@ -78,6 +82,11 @@
 		  do {
 		    validResponse = false;
 		    deckCount = prompt("How many decks to play with? 1 to 8.", 1);
+				if (deckCount === null) {
+					//cancel was pressed
+					numOfCards = 0;
+					return numOfCards;
+				}
 		    if (deckCount >= 1 && deckCount <= 8) {
 		      validResponse = true;
 		    }
@@ -306,9 +315,9 @@
 		  DealCount++;
 		  if (!isHoleCard) {
 		    dealerUpCard = calcScore(Dealer, DealCount, "dealer");
+				updateDealerScore("dealer", dealerUpCard);
 		  }
 		  DealerScore = calcScore(Dealer, DealCount, "dealer");
-		  updateDealerScore("dealer", DealerScore);
 		}
 
 		function evaluateDealerHand() {
@@ -805,11 +814,16 @@
 		function changeBetValue() {
 		  // if (SplitHand != 1)
 		  //   return;
-		  gBet[SplitHand] = prompt("Input your bet.", 1);
-		  displayBet(gBet[SplitHand]);
-		  /* use gBet0 for splits is case of double down */
-		  gBet[0] = gBet[SplitHand];
+			var newBet;
+			// gBet[SplitHand] = prompt("Input your bet.", 1);
+			newBet = prompt("Input your bet.", gBet[SplitHand]);
+			if (newBet !== null) {
+				gBet[SplitHand] = newBet;
+				displayBet(gBet[SplitHand]);
+				/* use gBet0 for splits is case of double down */
+				gBet[0] = gBet[SplitHand];
 
+			}
 		}
 
 		function playerDoubleDown() {
