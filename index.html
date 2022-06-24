@@ -17,48 +17,43 @@
   <div class="container">
     <div class="comp_player1 cardarea block" name="compplayer1">
       <p>Computer Player</p>
-
     </div>
+
     <div class="comp_player2 cardarea block" name="compplayer2">
       <p>Computer Player</p>
-
     </div>
+
     <div class="player cardarea block" name="player1">
       <p>Player</p>
-
     </div>
     <div class="player2 cardarea block hidden" name="player2">
       <p>Player Split</p>
-
     </div>
     <div class="player3 cardarea block hidden" name="player3">
       <p>Player Split</p>
-
     </div>
+
     <div class="dealer cardarea block" name="dealer">
       <p>Dealer</p>
-
     </div>
 
     <div class="control block">
       <form>
         <div class="row">
-          <input type="button" class="button-3" name="Deal" value="Deal" onClick="deal()">
-          <input type="button" class="button-3" name="ChangeBet" value="Change Bet" onClick="changeBetValue()">
           <input type="button" class="button-3" name="NewGame" value="New Game" onClick="newGame()">
-
+          <input type="button" class="button-3" name="ChangeBet" value="Change Bet" onClick="changeBetValue()">
+          <input type="button" class="button-3" name="Deal" value="Deal" onClick="deal()">
         </div>
+
         <div class="row">
-          <!-- <input type="button" class="button-3" name="Deal" value="Deal" onClick="deal()"> -->
-          <!-- <button class="button-3" role="button" name="Deal" value="Deal" onClick="deal()">Deal</button> -->
           <span class="player-controls">
             <input type="button" class="button-3" name="Hit" value="Hit" onClick="playerHit()">
             <input type="button" class="button-3" name="Stand" value="Stand" onClick="playerStand()">
             <input type="button" class="button-3" name="DoubleDown" value="Double" onClick="playerDoubleDown()">
             <input type="button" class="button-3" name="Split" value="Split" onClick="playerSplit()">
           </span>
-          <!-- &nbsp; &nbsp;<input type="button" class="button-3" name="NewGame" value="New Game" onClick="newGame()"> -->
         </div>
+
         <div class="row">
           <div class="column-inline">
             <lable class="label">Player: </lable>
@@ -68,19 +63,13 @@
             <lable class="label">Dealer: </lable>
             <input type="text" name="dealerscore" class="output" readonly>
           </div>
-          <!-- <div class="column-inline">
-            <input type="checkbox" name="showPS" onClick="showPlayerScore()">
-            <lable>Show Player Score</lable>
-          </div>
-          <div class="column-inline">
-            <input type="checkbox" name="showDS" onClick="showDealerScore()">
-            <lable>Show Dealer Score</lable>
-          </div> -->
         </div>
+
         <div class="row">
           <div class="column">
           </div>
         </div>
+
         <div class="row">
           <div class="column-inline">
             <lable class="label">Bank: </lable>
@@ -90,19 +79,15 @@
             <lable class="label">Bet: </lable>
             <input type="text" name="Bet" value="5" class="output" readonly>
           </div>
-          <!-- <div class="column-inline">
-            <input type="button" class="button-3 float-left" name="ChangeBet" value="Change Bet" onClick="changeBetValue()">
-          </div> -->
         </div>
 
       </form>
-
     </div>
 
     <div class="readout block">
-      <h1>Go Mets Bitches!</h1>
-
+      <h2>Go Mets Bitches!</h2>
     </div>
+
   </div>
   <footer>
       <p>Copyright © 2022 SGR3</p>

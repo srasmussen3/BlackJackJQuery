@@ -60,10 +60,10 @@
 		  console.log("newGame");
 		  enableDisableControlButtons("newGame");
 		  numCards = getNumDecks();
-			if (numCards === 0) {
-				enableDisableControlButtons("load");
-				return;
-			}
+		  if (numCards === 0) {
+		    enableDisableControlButtons("load");
+		    return;
+		  }
 		  startShuffleProcess();
 		  GameOver = false;
 		  StartGame = true;
@@ -82,11 +82,11 @@
 		  do {
 		    validResponse = false;
 		    deckCount = prompt("How many decks to play with? 1 to 8.", 1);
-				if (deckCount === null) {
-					//cancel was pressed
-					numOfCards = 0;
-					return numOfCards;
-				}
+		    if (deckCount === null) {
+		      //cancel was pressed
+		      numOfCards = 0;
+		      return numOfCards;
+		    }
 		    if (deckCount >= 1 && deckCount <= 8) {
 		      validResponse = true;
 		    }
@@ -125,7 +125,7 @@
 		  } else {
 		    shufflePoint = Math.round(numOfCards * .8);
 		  }
-			numDecks = parseInt(deckCount);
+		  numDecks = parseInt(deckCount);
 		  return numOfCards;
 		}
 
@@ -315,7 +315,7 @@
 		  DealCount++;
 		  if (!isHoleCard) {
 		    dealerUpCard = calcScore(Dealer, DealCount, "dealer");
-				updateDealerScore("dealer", dealerUpCard);
+		    updateDealerScore("dealer", dealerUpCard);
 		  }
 		  DealerScore = calcScore(Dealer, DealCount, "dealer");
 		}
@@ -621,17 +621,32 @@
 		}
 
 		function shuffle_deck(RandNum, CardDeck, numOfCards) {
-		  Finish = numOfCards;
-		  Start = 0;
-		  Count = Finish - Start + 1;
-		  for (i = 0; i <= Finish; i++) {
-		    val = RandNum.next() + "";
-		    rand = val.substring(4, 6);
-		    j = rand % Count + Start;
-		    t = CardDeck[i];
-		    CardDeck[i] = CardDeck[j];
-		    CardDeck[j] = t;
+		  // Finish = numOfCards;
+		  // Start = 0;
+		  // Count = Finish - Start + 1;
+		  // for (i = 0; i <= Finish; i++) {
+		  //   val = RandNum.next() + "";
+		  //   rand = val.substring(4, 6);
+		  //   j = rand % Count + Start;
+		  //   t = CardDeck[i];
+		  //   CardDeck[i] = CardDeck[j];
+		  //   CardDeck[j] = t;
+		  // }
+		  //seem to get clumps of red/black when multi decks
+		  //try fisher-yates shuffle
+
+		  var i = 0;
+		  var j = 0;
+		  var temp = null;
+
+		  for (i = CardDeck.length - 1; i > 0; i--) {
+		    j = Math.floor(Math.random() * (i + 1));
+		    temp = CardDeck[i];
+		    CardDeck[i] = CardDeck[j]
+		    CardDeck[j] = temp
 		  }
+
+
 		  //TESTING: create valid split deck
 		  // CardDeck[2] = CardDeck[6];
 
@@ -659,12 +674,12 @@
 
 		function card_suit(val) {
 		  Suit = "";
-			console.log(val);
+		  console.log(val);
 
-		  valx = (val/numDecks) / 13 + "";
-			console.log(valx);
+		  valx = (val / numDecks) / 13 + "";
+		  console.log(valx);
 		  valx = valx.substring(0, 1);
-			console.log(valx);
+		  console.log(valx);
 		  if (valx == 0) Suit = "S";
 		  if (valx == 1) Suit = "C";
 		  if (valx == 2) Suit = "H";
@@ -749,7 +764,7 @@
 		}
 
 		function readoutDisplay(Text) {
-		  $(".readout h1").text(Text);
+		  $(".readout h2").text(Text);
 		}
 
 		function nextRandomNumber() {
@@ -814,16 +829,16 @@
 		function changeBetValue() {
 		  // if (SplitHand != 1)
 		  //   return;
-			var newBet;
-			// gBet[SplitHand] = prompt("Input your bet.", 1);
-			newBet = prompt("Input your bet.", gBet[SplitHand]);
-			if (newBet !== null) {
-				gBet[SplitHand] = newBet;
-				displayBet(gBet[SplitHand]);
-				/* use gBet0 for splits is case of double down */
-				gBet[0] = gBet[SplitHand];
+		  var newBet;
+		  // gBet[SplitHand] = prompt("Input your bet.", 1);
+		  newBet = prompt("Input your bet.", gBet[SplitHand]);
+		  if (newBet !== null) {
+		    gBet[SplitHand] = newBet;
+		    displayBet(gBet[SplitHand]);
+		    /* use gBet0 for splits is case of double down */
+		    gBet[0] = gBet[SplitHand];
 
-			}
+		  }
 		}
 
 		function playerDoubleDown() {
@@ -1083,7 +1098,7 @@
 		  for (SplitCount = 1; SplitCount < SplitHand; SplitCount++) {
 		    if (PlayerScore[SplitCount] === 21 && PlayCount[SplitCount] === 3) {
 		      splitReadout = splitReadout + " Hand " + SplitCount + ": Player Blackjack! ";
-		      gBank = updateBank("Dealer", gBank, (Math.round(gBet[SplitCount] * 1.5)));
+		      gBank = updateBank("Player", gBank, (Math.round(gBet[SplitCount] * 1.5)));
 		      continue;
 		    }
 		    if (PlayerScore[SplitCount] > 21) {
@@ -1293,22 +1308,23 @@
 		    return false;
 		  }
 		}
+
 		function getFuncName() {
 		  return getFuncName.caller.name
 		}
 
-
 		function showPlayerScore() {
-			if ($("input[name='showPS']").prop("checked")) {
-				$("input[name='playerscore']").removeClass("hidden-text")
-			} else {
-				$("input[name='playerscore']").addClass("hidden-text")
-			}
+		  if ($("input[name='showPS']").prop("checked")) {
+		    $("input[name='playerscore']").removeClass("hidden-text")
+		  } else {
+		    $("input[name='playerscore']").addClass("hidden-text")
+		  }
 		}
+
 		function showDealerScore() {
-			if ($("input[name='showDS']").prop("checked")) {
-				$("input[name='dealerscore']").removeClass("hidden-text")
-			} else {
-				$("input[name='dealerscore']").addClass("hidden-text")
-			}
+		  if ($("input[name='showDS']").prop("checked")) {
+		    $("input[name='dealerscore']").removeClass("hidden-text")
+		  } else {
+		    $("input[name='dealerscore']").addClass("hidden-text")
+		  }
 		}

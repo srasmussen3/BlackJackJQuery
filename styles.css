@@ -10,64 +10,18 @@ body {
   color: yellow;
 }
 
-h1 {
+h1, h2 {
   text-align: center;
 }
+
 
 div {
   text-align: center;
 }
 
-.activeHand {
-  background-color: #32a852;
-}
-
-.container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
-.cardarea {
-  height: 145px;
-  margin-bottom: 1px;
-  align-items: center;
-}
-
-.inline-half {
-  width: 49%;
-}
-
-.inline-third {
-  width: 33%;
-}
-
-.block {
-  width: 100%;
-}
-
-.control {
-  padding: 5px;
-  border: 1px solid black;
-  margin-bottom: 1px;
-  width: 100%;
-  margin: auto;
-}
-
-.readout {
-  height: 80px;
-  border: 1px solid black;
-  margin-bottom: 1px;
-}
-
-.hidden {
-  /* visibility: hidden; */
-  display: none;
-}
-
 img {
-  max-width: 14%;
   height: auto;
+  max-width: 14%;
 }
 
 input[type="text"] {
@@ -84,22 +38,69 @@ input[type='checkbox']:checked {
     accent-color: #dde0da;
 }
 
-.row {
-  width: 100%;
-  display: block;
+.activeHand {
+  background-color: #32a852;
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.cardarea {
   align-items: center;
+  height: 145px;
+  margin-bottom: 1px;
+}
+
+.inline-half {
+  width: 49%;
+}
+
+.inline-third {
+  width: 33%;
+}
+
+.block {
+  width: 100%;
+}
+
+.control {
+  border: 1px solid black;
+  margin-bottom: 1px;
+  margin: auto;
+  padding: 5px;
+  width: 100%;
+}
+
+.readout {
+  border: 1px solid black;
+  height: 80px;
+  margin-bottom: 1px;
+}
+
+.hidden {
+  /* visibility: hidden; */
+  display: none;
+}
+
+.row {
+  align-items: center;
+  display: block;
+  width: 100%;
 }
 
 .column {
-  width: 100%;
+  align-items: center;
   display: inline-block;
   min-height: 5px;
-  align-items: center;
+  width: 100%;
 }
 
 .column-inline {
-  width: 100%;
   display: inline;
+  /* width: 100%; */
 }
 
 .player-controls {
@@ -107,15 +108,15 @@ input[type='checkbox']:checked {
 }
 
 .label {
-  width: 15%;
   float: left;
   margin-left: 5px;
+  width: 15%;
 }
 
 .output {
-  width: 60%;
   float: left;
   text-align: right;
+  width: 60%;
 }
 
 .float-left {
@@ -129,8 +130,8 @@ input[type='checkbox']:checked {
 }
 
 footer {
+  height: .7rem;
   text-align: center;
-  height: .7 rem;
 }
 
 .hidden-text{
@@ -194,21 +195,21 @@ footer {
 }
 
 @media only screen and (max-width: 600px) {
-  .control {
-    width: 100%;
-  }
-  img {
-    max-width: 14%;
-    max-height: 65%;
-  }
-  .cardarea {
-    height: 110px;
-  }
-  h1 {
+  h1, h2 {
     margin: 10px;
   }
   p {
     margin-bottom: 5px;
+  }
+  img {
+    max-height: 65%;
+    max-width: 14%;
+  }
+  .control {
+    width: 100%;
+  }
+  .cardarea {
+    height: 110px;
   }
   .button-3 {
     line-height: 10px;
