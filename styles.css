@@ -46,6 +46,7 @@ input[type='checkbox']:checked {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  min-height: calc(100vh - 90px);
 }
 
 .cardarea {
@@ -78,6 +79,10 @@ input[type='checkbox']:checked {
   border: 1px solid black;
   height: 80px;
   margin-bottom: 1px;
+  font-size: .9rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .hidden {
@@ -100,6 +105,7 @@ input[type='checkbox']:checked {
 
 .column-inline {
   display: inline;
+  /* justify-content: center; */
   /* width: 100%; */
 }
 
@@ -108,13 +114,14 @@ input[type='checkbox']:checked {
 }
 
 .label {
-  float: left;
+  /* float: left; */
+  display: inline-block;
   margin-left: 5px;
-  width: 15%;
+  width: 50px;
 }
 
 .output {
-  float: left;
+  /* float: left; */
   text-align: right;
   width: 60%;
 }
