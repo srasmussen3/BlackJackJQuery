@@ -51,6 +51,8 @@
 		var dealRoundDelay = 500;
 		var currCompPlayer = 0;
 		var HandsNotBusted = 3; //count active hands when no player splits
+		var gInsuranceBet = 0;
+		var InsuranceActive = false;
 
 		$(document).ready(function() {
 		  enableDisableControlButtons("load");
@@ -166,6 +168,7 @@
 		  CompPlayerScore[2] = 0;
 		  dealerUpCard = 0;
 		  HandsNotBusted = 3;
+			InsuranceActive = false;
 		  //added bet code
 		  gBet[SplitHand] = getBet(gBank);
 		  if (gBet[SplitHand] == 0) {
@@ -285,7 +288,7 @@
 		      dealDealer(playerTurn, true);
 		      break;
 		    default:
-		      evaluateDealerHand();
+		      evaluateDealerHandInit();
 		      return;
 		      break;
 
@@ -320,6 +323,17 @@
 		  DealerScore = calcScore(Dealer, DealCount, "dealer");
 		}
 
+		function evaluateDealerHandInit() {
+			//evaluate for insurance
+			if (dealerUpCard == 11) {
+				$(".cardarea").removeClass("activeHand");
+				$(".player").addClass("activeHand");
+				showHideInsuranceButtons("Show")
+			} else {
+				evaluateDealerHand();
+			}
+		}
+
 		function evaluateDealerHand() {
 
 		  if (DealerScore == 21) {
@@ -327,6 +341,12 @@
 		      clearFrame("dealer", showDealerCardsWithBJInit);
 		    }, dealRoundDelay);
 		  } else {
+				if (InsuranceActive) {
+					//player lost insurance bet
+					readoutDisplay("Player Loses Insurance Bet!");
+					gBank = updateBank("Dealer", gBank, gInsuranceBet);
+				}
+
 		    playComputerPlayersHands();
 		  }
 		}
@@ -354,7 +374,12 @@
 
 		function evaluateDealerHandBJ() {
 		  DealerScore = calcScore(Dealer, DealCount, "dealer");
-		  readoutDisplay("Dealer Blackjack!");
+			if (InsuranceActive) {
+				gBank = updateBank("Player", gBank, gInsuranceBet * 2);
+				readoutDisplay("Dealer Blackjack! Player wins Insurance");
+			} else {
+				readoutDisplay("Dealer Blackjack!");
+			}
 		  gBank = updateBank("Dealer", gBank, gBet[SplitHand]);
 		  GameOver = true;
 
@@ -364,8 +389,6 @@
 		  } else {
 		    endHand();
 		  }
-
-
 		}
 
 		function evaluatePlayerHandBJ() {
@@ -649,6 +672,8 @@
 
 		  //TESTING: create valid split deck
 		  // CardDeck[2] = CardDeck[6];
+			//TESTING: create dealer Ace face up
+		  CardDeck[3] = 13;
 
 		  return CardDeck;
 		}
@@ -830,14 +855,12 @@
 		  // if (SplitHand != 1)
 		  //   return;
 		  var newBet;
-		  // gBet[SplitHand] = prompt("Input your bet.", 1);
 		  newBet = prompt("Input your bet.", gBet[SplitHand]);
 		  if (newBet !== null) {
 		    gBet[SplitHand] = newBet;
 		    displayBet(gBet[SplitHand]);
 		    /* use gBet0 for splits is case of double down */
 		    gBet[0] = gBet[SplitHand];
-
 		  }
 		}
 
@@ -1327,4 +1350,50 @@
 		  } else {
 		    $("input[name='dealerscore']").addClass("hidden-text")
 		  }
+		}
+
+		function insurance(action) {
+		  if (action === "Yes") {
+				InsuranceActive = true;
+				//insurance is half of orig bet and pays 2 to 1
+				gInsuranceBet = Math.floor(gBet[SplitHand]/2);
+		  } else {
+				InsuranceActive = false;
+				gInsuranceBet = 0;
+		  }
+			//hide insurance buttons and redisplay action buttons
+			showHideInsuranceButtons("Hide");
+			$(".cardarea").removeClass("activeHand");
+			$(".comp_player1").addClass("activeHand");
+			setTimeout(evaluateDealerHand, dealRoundDelay);
+		}
+
+		function showHideInsuranceButtons(action) {
+
+			//need to add/remove button-3 class as well as hidden
+			//class as button-3 display overrides hidden even though hidden
+			//should be applied last?!?
+			if (action === "Show") {
+				$("input[name='NewGame']").removeClass("button-3");
+				$("input[name='ChangeBet']").removeClass("button-3");
+				$("input[name='Deal']").removeClass("button-3");
+				$("input[name='NewGame']").addClass("hidden");
+				$("input[name='ChangeBet']").addClass("hidden");
+				$("input[name='Deal']").addClass("hidden");
+				$("input[name='InsuranceYes']").removeClass("hidden");
+				$("input[name='InsuranceNo']").removeClass("hidden");
+				$("input[name='InsuranceYes']").addClass("button-3");
+				$("input[name='InsuranceNo']").addClass("button-3");
+			} else {
+				$("input[name='NewGame']").removeClass("hidden");
+				$("input[name='ChangeBet']").removeClass("hidden");
+				$("input[name='Deal']").removeClass("hidden");
+				$("input[name='NewGame']").addClass("button-3");
+				$("input[name='ChangeBet']").addClass("button-3");
+				$("input[name='Deal']").addClass("button-3");
+				$("input[name='InsuranceYes']").removeClass("button-3");
+				$("input[name='InsuranceNo']").removeClass("button-3");
+				$("input[name='InsuranceYes']").addClass("hidden");
+				$("input[name='InsuranceNo']").addClass("hidden");
+			}
 		}
