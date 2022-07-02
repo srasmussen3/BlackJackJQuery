@@ -33,7 +33,7 @@
 		var DealerScore = 0
 		var CompPlayerScore = new Array(3);
 		var gBank = 200
-		var gBet = new Array(5, 5, 0, 0);
+		var gBet = new Array(10, 10, 0, 0);
 		var GameOver = true;
 		var StartGame = false;
 		var SessionOver = false;
@@ -63,14 +63,14 @@
 		  enableDisableControlButtons("newGame");
 		  numCards = getNumDecks();
 		  if (numCards === 0) {
-		    enableDisableControlButtons("load");
+		    //enableDisableControlButtons("load");
 		    return;
 		  }
 		  startShuffleProcess();
 		  GameOver = false;
 		  StartGame = true;
 		  gBank = 200;
-		  gBet = [5, 5, 0, 0];
+		  gBet = [10, 10, 0, 0];
 		  displayBet(gBet[SplitHand]);
 		  displayBank(gBank);
 		  readoutDisplay("Go Mets Bitches!")
@@ -80,10 +80,10 @@
 		}
 
 		function getNumDecks() {
-		  var numOfCards = 51;
+		  var numOfCards = 415;
 		  do {
 		    validResponse = false;
-		    deckCount = prompt("How many decks to play with? 1 to 8.", 1);
+		    deckCount = prompt("How many decks to play with? 1 to 8.", 8);
 		    if (deckCount === null) {
 		      //cancel was pressed
 		      numOfCards = 0;
@@ -132,9 +132,9 @@
 		}
 
 		function startShuffleProcess() {
-		  CardDeck = array_fill(0, numCards);
+		  CardDeck = fillArray(0, numCards);
 		  RandNum = new randomNumberGenerator();
-		  ShuffledDeck = shuffle_deck(RandNum, CardDeck, numCards);
+		  ShuffledDeck = shuffleDeck(RandNum, CardDeck, numCards);
 		  CurrentCard = 0;
 		  needToShuffle = false;
 		}
@@ -635,7 +635,7 @@
 
 		}
 
-		function array_fill(StartVal, StopVal) {
+		function fillArray(StartVal, StopVal) {
 		  RetArray = new Array(StopVal - StartVal);
 		  for (Count = StartVal; Count <= StopVal; Count++) {
 		    RetArray[Count] = Count;
@@ -643,7 +643,7 @@
 		  return RetArray;
 		}
 
-		function shuffle_deck(RandNum, CardDeck, numOfCards) {
+		function shuffleDeck(RandNum, CardDeck, numOfCards) {
 		  // Finish = numOfCards;
 		  // Start = 0;
 		  // Count = Finish - Start + 1;
@@ -673,12 +673,12 @@
 		  //TESTING: create valid split deck
 		  // CardDeck[2] = CardDeck[6];
 			//TESTING: create dealer Ace face up
-		  CardDeck[3] = 13;
+		  //CardDeck[3] = 13;
 
 		  return CardDeck;
 		}
 
-		function card_face(val) {
+		function cardFace(val) {
 		  valx = val % 13;
 		  if (valx == 0) Face = "A";
 		  if (valx == 1) Face = "2";
@@ -693,11 +693,11 @@
 		  if (valx == 10) Face = "J";
 		  if (valx == 11) Face = "Q";
 		  if (valx == 12) Face = "K";
-		  Suit = card_suit(val);
+		  Suit = cardSuit(val);
 		  return Face + Suit
 		}
 
-		function card_suit(val) {
+		function cardSuit(val) {
 		  Suit = "";
 		  console.log(val);
 
@@ -755,7 +755,7 @@
 
 		function showCard(Turn, isHoleCard = false) {
 
-		  DisplayCard = card_face(ShuffledDeck[CurrentCard]);
+		  DisplayCard = cardFace(ShuffledDeck[CurrentCard]);
 		  CardName = DisplayCard.toUpperCase() + ".JPG";
 		  CurrentCard++;
 		  if (CurrentCard >= shufflePoint) {
